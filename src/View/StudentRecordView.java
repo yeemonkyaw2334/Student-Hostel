@@ -593,28 +593,11 @@ public class StudentRecordView extends JFrame {
 		});
 		getContentPane().add(btnRegister);
 
-		cboRegion = new JComboBox();
-		for (int i = 1; i <= 14; i++) {
-			cboRegion.addItem(String.valueOf(i));
-		}
+		cboRegion = new JComboBox(new String[]{"1","2","3","4","5","6","7","8","9","10","11","12","13","14"});
 		cboRegion.setBounds(172, 216, 45, 28);
 		getContentPane().add(cboRegion);
 
 		cboTownship = new JComboBox();
-		
-		// Assuming you want exactly 422 townships:
-		String[] townshipList = new String[422];
-		String[] townshiplist = { "PaKaNa", "MaKaNa", "KaLaNa", "BaLaNa", "DaGaNa" }; // You can expand this list
-		
-		// Fill the array with sample townships
-		for (int i = 0; i < 422; i++) {
-		    townshipList[i] = "Township " + (i + 1); // Or you can use actual names
-		}
-
-		// Populate the JComboBox with these items
-		for (String township : townshipList) {
-		    cboTownship.addItem(township);
-	}
 		cboTownship.setBounds(221, 216, 70, 28);
 		getContentPane().add(cboTownship);
 
@@ -631,6 +614,122 @@ public class StudentRecordView extends JFrame {
 		getContentPane().add(txtNRCNumber);
 		txtNRCNumber.setColumns(10);
 		
+		cboRegion.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        String selectedRegion = cboRegion.getSelectedItem().toString();
+		        cboTownship.removeAllItems(); // Clear existing items
+		        if (selectedRegion.equals("1")) {
+		        	String[] townships = {"BaMaNa", "KhaHpaNa", "DaHpaYa", "HaPaNa", "HpaKaNa", "AhGaNa",
+                            "KaMaTa", "KaPaTa", "KhaLaHpa", "LaGaNa", "MaKhaBa", "MaSaNa",
+                            "MaKaTa", "MaNyaNa", "MaMaNa", "MaKaNa", "MaLaNa", "NaMaNa",
+                            "PaWaNa", "PaNaDa", "PaTaAh", "SaDaNa", "YaBaYa", "YaKaNa",
+                            "SaBaNa", "SaPaYa", "TaNaNa", "TaSaLa", "WaMaNa"};
+		        	for (String township : townships) {
+		                cboTownship.addItem(township);
+		            }
+		        } else if (selectedRegion.equals("2")) {
+		        	String[] townships = {"BaLaKha", "DaMaSa", "HpaSaNa", "HpaYaSa", "LaKaNa", "MaTaNa",
+                            "YaTaNa", "YaThaNa"};
+		        	for (String township : townships) {
+		                cboTownship.addItem(township);
+		            }
+		        } else if (selectedRegion.equals("3")) {
+		        	String[] townships = {"BaGaLa", "LaBaNa", "BaAhNa", "HpaPaNa", "BaThaSa", "KaMaMa",
+                            "KaKaYa", "KaDaNa", "KaSaKa", "KaDaTa", "LaThaNa", "MaWaTa",
+                            "PaKaNa", "YaYaTha", "SaKaLa", "ThaTaNa", "ThaTaKa", "WaLaMa",
+                             };
+		        	for (String township : townships) {
+		                cboTownship.addItem(township);
+		            }
+		        } else if (selectedRegion.equals("4")) {
+		        	String[] townships = {"KaKhaNa", "HpaLaNa", "HaKhaNa", "KaPaLa", "MaTaPa", "MaTaNa",
+                            "PaLaWa", "YaZaNa", "YaKhaDa", "SaMaNa", "TaTaNa", "HtaTaLa",
+                            "TaZaNa"
+                             };
+		        	for (String township : townships) {
+		                cboTownship.addItem(township);
+		            }
+		        }
+		        else if (selectedRegion.equals("5")) {
+		        	String[] townships = {"AhYaTa", "BaMaNa", "BaTaLa", "KhaOuTa", "KaTaNa", "HaMaLa",
+                            "AhTaNa", "KaLaHta", "KaLaWa", "KaBaLa", "KaNaNa", "KaThaNa",
+                            "KaLaTa", "KhaOuNa", "KaLaNa", "LaHaNa", "LaYaNa", "MaLaNa",
+                            "MaKaNa", "MaYaNa","MaMaNa","MaMaTa","NaYaNa","NgaZaNa","PaLaNa","HpaPaNa"
+                            ,"PaLaBa","SaKaNa","SaLaKa","YaBaNa","DaPaYa","TaMaNa","TaSaNa","HtaKaNa","WaLaNa"
+                            ,"WaThaNa","YaOuNa","YaMaPa","KaMaNa","KhaPaNa"};
+		        	for (String township : townships) {
+		                cboTownship.addItem(township);
+		            }	        	
+		        }
+		        else if (selectedRegion.equals("6")) {
+		        	String[] townships = {"BaPaNa", "HtaWaNa", "KaLaAh", "KaThaNa", "KaSaNa", "LaLaNa",
+                            "MaMaNa", "PaLaNa", "TaThaYa", "ThaYaKha", "YaPhaNa", "KhaMaNa",
+                            "MaTaNa", "PaLaTa", "KaYaYa"};
+		        	for (String township : townships) {
+		                cboTownship.addItem(township);
+		            }     	
+		        }
+		        else if (selectedRegion.equals("7")) {
+		        	String[] townships = {"DaOuNa", "KaPaKa", "KaWaNa", "KaKaNa", "KaTaKha", "LaPaTa",
+                            "MaLaNa", "MaNyaNa", "NaTaLa", "NyaLaPa", "AhHpaNa", "AhTaNa",
+                            "PaTaNa", "PaKhaTa", "PaKhaNa", "PaTaTa", "PaNaKa", "HpaMaNa",
+                            "PaMaNa", "YaTaNa","YaKaNa","HtaTaPa","TaNgaNa","ThaNaPa","ThaWaTa","ThaKaNa"
+                            ,"ThaSaNa","WaMaNa","YaTaYa","ZaKaNa","PaTaSa"};
+		        	for (String township : townships) {
+		                cboTownship.addItem(township);
+		            }     	
+		        }
+		        else if (selectedRegion.equals("8")) {
+		        	String[] townships = {"AhLaNa", "KhaMaNa", "GaGaNa", "KaMaNa", "MaKaNa", "MaBaNa",
+                            "MaTaNa", "MaLaNa", "MaMaNa", "MaHtaNa", "MaThaNa", "NaMaMa",
+                            "NgaHpaNa", "PaKhaKa", "PaMaNa", "PaHpaNa", "SaLaNa", "SaMaNa",
+                            "SaHpaNa", "SaTaYa","SaPaWa","TaTaKa","ThaYaNa","HtaLaNa","YaNaKha","YaSaKa","KaHtaNa"
+                            };
+		        	for (String township : townships) {
+		                cboTownship.addItem(township);
+		            }     	
+		        }
+		        else if (selectedRegion.equals("9")) {
+		        	String[] townships = {"AhMaYa", "AhMaZa", "KhaAhZa", "KhaMaSa", "KaPaTa", "KaSaNa",
+                            "MaTaYa", "MaHaMa", "MaLaNa", "MaHtaLa", "MaKaNa", "MaKhaNa",
+                            "MaThaNa", "NaHtaKa", "NgaThaYa", "NgaZaNa", "NyaOuNa", "PaThaKa",
+                            "PaBaNa", "PaKaKha","PaOuLa","SaKaNa","ThaPaKa","TaTaOu","TaThaNa","ThaSaNa","WaTaNa"
+                            ,"YaMaTha","TaKaTa","MaMaNa","DaKhaTha","LaWaNa","OuTuTha","PaBaTha","PaMaNa","TaKaNa","ZaBaTha","ZaYaTha"
+                            };		        	
+		        	for (String township : townships) {
+		                cboTownship.addItem(township);
+		            }     	
+		        }
+		        else if (selectedRegion.equals("10")) {
+		        	String[] townships = {"BaLaNa", "KhaSaNa", "KhaZaNa", "KaMaYa", "KaHtaNa", "LaMaNa",
+                            "MaLaMa", "MaDaNa", "PaMaNa", "ThaHpaYa", "ThaHtaNa", "YaMaNa"
+                            };		        	
+		        	for (String township : townships) {
+		                cboTownship.addItem(township);
+		            }     	
+		        }
+		        else if (selectedRegion.equals("11")) {
+		        	String[] townships = {"AhMaNa", "BaThaTa", "GaMaNa", "KaHpaNa", "KaTaNa", "MaAhTa",
+                            "MaTaNa", "MaPaNa", "MaAhNa", "MaOuNa", "MaPaTa", "PaNaTa","YaBaNa",
+                            "YaThaTa","SaTaNa","ThaTaNa","TaKaNa","KaTaLa","TaPaWa","BaTaHta"
+                            };		        	
+		        	for (String township : townships) {
+		                cboTownship.addItem(township);
+		            }     	
+		        }
+		        else if (selectedRegion.equals("12")) {
+		        	String[] townships = {"AhLaNa", "BaHaNa", "KaKaKa", "DaGaYa", "DaGaMa", "DaGaSa",
+                            "DaGaTa", "DaGaNa", "DaLaNa", "DaPaNa", "LaThaYa", "LaMaNa","LaKaNa",
+                            "MaBaNa","HtaTaPa","AhSaNa","KaMaYa","KaMaNa","KhaYaNa","KaKhaKa","KaTaTa",
+                            "KaTaNa","KaMaTa","LaMaTa","LaThaNa","MaYaKa","MaGaDa","MaGaTa","OuKaMa","PaBaTa",
+                            ""
+                            };		        	
+		        	for (String township : townships) {
+		                cboTownship.addItem(township);
+		            }     	
+		        }
+		}
+		});
 		btnShowall.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
