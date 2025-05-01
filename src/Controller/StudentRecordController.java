@@ -2,9 +2,8 @@ package Controller;
 
 import java.util.*;
 import java.sql.*;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class StudentRecordController {
 			ps.setString(2, dain.getStaffID());
 			ps.setString(3, dain.getStudentName());
 			ps.setString(4, dain.getStudentNRC());
-			ps.setString(5, dain.getStudentDOB());
+			ps.setDate(5, new java.sql.Date(dain.getStudentDOB().getTime()));
 			ps.setString(6, dain.getAddress());
 			ps.setString(7, dain.getPhoneNumber());
 			ps.setString(8, dain.getEmail());
@@ -61,7 +60,7 @@ public class StudentRecordController {
 			PreparedStatement ps = (PreparedStatement) con.prepareStatement(sql);
 			ps.setString(1, dain.getStudentName());
 			ps.setString(2, dain.getStudentNRC());
-			ps.setString(3, dain.getStudentDOB());
+			ps.setDate(3, new java.sql.Date(dain.getStudentDOB().getTime()));
 			ps.setString(4, dain.getAddress());
 			ps.setString(5, dain.getPhoneNumber());
 			ps.setString(6, dain.getEmail());
@@ -105,36 +104,38 @@ public class StudentRecordController {
 		//DELETR METHOD END
 		
 		
-	public List<StudentRecordModel> selectall()throws SQLException{
-		List<StudentRecordModel> list = new ArrayList<StudentRecordModel>();
-		String sql = "select * from student_hostel.studentrecord order by student_ID desc";
-		PreparedStatement ps = (PreparedStatement) con.prepareStatement(sql);
-		ResultSet rs = ps.executeQuery();
-		while(rs.next()) {
-			StudentRecordModel bm = new StudentRecordModel();
-			bm.setStudentID(rs.getString("student_ID"));
-			bm.setStaffID(rs.getString("staff_ID"));
-		    bm.setStudentName(rs.getString("student_name"));
-		    bm.setStudentDOB(rs.getString("student_DOB"));
-		    bm.setStudentNRC(rs.getString("student_NRC"));
-		    bm.setAddress(rs.getString("student_address"));
-		    bm.setPhoneNumber(rs.getString("student_phonenumber"));
-		    bm.setEmail(rs.getString("student_email"));
-		    bm.setEntryYear(rs.getString("student_entryyear"));
-		    bm.setGender(rs.getString("student_gender"));
-		    bm.setFatherName(rs.getString("student_fathername"));
-		    bm.setGuardianPhoneNumber(rs.getString("student_guardianphonenumber"));
-		    bm.setDataEntryDate(rs.getString("student_dataentrydate"));
-		    bm.setRemark(rs.getString("student_remark"));
+		public List<StudentRecordModel> selectall() throws SQLException {
+		    List<StudentRecordModel> list = new ArrayList<StudentRecordModel>();
+		    String sql = "select * from student_hostel.studentrecord order by student_ID desc";
+		    PreparedStatement ps = con.prepareStatement(sql);
+		    ResultSet rs = ps.executeQuery();
 		    
-		    StaffModel sm = new StaffModel();
-			StaffController sc = new StaffController();
-			sm.setStaffID(bm.getStaffID());
-		    
-		    list.add(bm);
+		    while (rs.next()) {
+		        StudentRecordModel bm = new StudentRecordModel();
+		        bm.setStudentID(rs.getString("student_ID"));
+		        bm.setStaffID(rs.getString("staff_ID"));
+		        bm.setStudentName(rs.getString("student_name"));
+		        
+		        // Get the student DOB as a java.sql.Date
+		        bm.setStudentDOB(rs.getDate("student_DOB"));  // This is a java.sql.Date
+		        
+		        bm.setStudentNRC(rs.getString("student_NRC"));
+		        bm.setAddress(rs.getString("student_address"));
+		        bm.setPhoneNumber(rs.getString("student_phonenumber"));
+		        bm.setEmail(rs.getString("student_email"));
+		        bm.setEntryYear(rs.getString("student_entryyear"));
+		        bm.setGender(rs.getString("student_gender"));
+		        bm.setFatherName(rs.getString("student_fathername"));
+		        bm.setGuardianPhoneNumber(rs.getString("student_guardianphonenumber"));
+		        bm.setDataEntryDate(rs.getString("student_dataentrydate"));
+		        bm.setRemark(rs.getString("student_remark"));
+		        
+		        list.add(bm);
+		    }
+		    return list;
 		}
-		return list;
-	}
+
+
 	
 	public List<StudentRecordModel> selectone(StudentRecordModel dain) throws SQLException{
 		List<StudentRecordModel> list = new ArrayList<StudentRecordModel>();
@@ -147,7 +148,10 @@ public class StudentRecordController {
 			bm.setStudentID(rs.getString("student_ID"));
 			bm.setStaffID(rs.getString("staff_ID"));
 		    bm.setStudentName(rs.getString("student_name"));
-		    bm.setStudentDOB(rs.getString("student_DOB"));
+		    
+		    Date dob = rs.getDate("student_DOB");
+		    bm.setStudentDOB(dob);
+		    
 		    bm.setStudentNRC(rs.getString("student_NRC"));
 		    bm.setAddress(rs.getString("student_address"));
 		    bm.setPhoneNumber(rs.getString("student_phonenumber"));

@@ -57,6 +57,7 @@ public class Checking {
 		
 	}
 	
+	
 	public static boolean isPhoneNo(String str) {
 		if(str !=null && str.length()<=11) {
 			return str.startsWith("09");

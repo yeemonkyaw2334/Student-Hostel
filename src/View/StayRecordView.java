@@ -34,12 +34,12 @@ public class StayRecordView extends JFrame {
             }
         };
         panel.setBounds(0, 0, 784, 461);
-        panel.setLayout(null);
         getContentPane().add(panel);
+        panel.setLayout(null);
 
         JLabel titleLabel = new JLabel("Stay Record Details");
-        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 24));
         titleLabel.setBounds(270, 20, 300, 30);
+        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 24));
         titleLabel.setForeground(new Color(33, 37, 41));
         panel.add(titleLabel);
 
@@ -55,7 +55,7 @@ public class StayRecordView extends JFrame {
         table.setGridColor(Color.LIGHT_GRAY);
 
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(60, 80, 660, 320);
+        scrollPane.setBounds(88, 111, 632, 289);
         panel.add(scrollPane);
 
         JButton btnClose = new JButton("Close");
@@ -66,6 +66,22 @@ public class StayRecordView extends JFrame {
         btnClose.setFocusPainted(false);
         btnClose.addActionListener(e -> dispose());
         panel.add(btnClose);
+        
+        JLabel lblStaffID = new JLabel("Staff ID");
+        lblStaffID.setBounds(88, 67, 63, 14);
+        panel.add(lblStaffID);
+        
+        JLabel lblStaffAutoID = new JLabel("New label");
+        lblStaffAutoID.setBounds(180, 67, 84, 14);
+        panel.add(lblStaffAutoID);
+        
+        JLabel lblStaffName = new JLabel("Staff Name");
+        lblStaffName.setBounds(88, 92, 63, 14);
+        panel.add(lblStaffName);
+        
+        JLabel StaffName = new JLabel("New label");
+        StaffName.setBounds(180, 92, 84, 14);
+        panel.add(StaffName);
 
         // Load data into table
         try {

@@ -6,7 +6,7 @@ public class StudentRecordModel {
     private String studentID;
     private String staffID;
     private String studentName;
-    private String studentDOB;
+    private Date studentDOB;
     private String studentNRC;
     private String address;
     private String phoneNumber;
@@ -27,9 +27,7 @@ public class StudentRecordModel {
     public String getStudentName() { return studentName; }
     public void setStudentName(String studentName) { this.studentName = studentName; }
 
-    public String getStudentDOB() { return studentDOB; }
-    public void setStudentDOB(String studentDOB) { this.studentDOB = studentDOB; }
-
+    
     public String getStudentNRC() { return studentNRC; }
     public void setStudentNRC(String studentNRC) { this.studentNRC = studentNRC; }
 
@@ -118,6 +116,12 @@ public class StudentRecordModel {
     public String getFormattedNRC() {
         return regionCode + "/" + townshipCode + citizenType + number;
     }
+	public Date getStudentDOB() {
+		return studentDOB;
+	}
+	public void setStudentDOB(Date studentDOB) {
+		this.studentDOB = studentDOB;
+	}
 	
 
 }

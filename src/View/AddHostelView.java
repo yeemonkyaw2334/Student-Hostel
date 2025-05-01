@@ -66,7 +66,6 @@ public class AddHostelView extends JFrame {
     private JButton btnUpdate;
     private JButton btnDelete;
     private JButton btnClear;
-    private JButton btnClose;
     private JButton btnShowAll;
 
     private JLabel lblDateTime;
@@ -79,7 +78,7 @@ public class AddHostelView extends JFrame {
 	int r=0;
 	String HostelID=null;
 	private JScrollPane scrollPane;
-	private JLabel lblNewLabel_1;
+	private JLabel lblAutoStaffID;
     /**
      * Launch the application.
      */
@@ -444,22 +443,10 @@ public class AddHostelView extends JFrame {
 		});
         
 
-        btnClear.setBounds(74, 417, 85, 33);
+        btnClear.setBounds(72, 417, 85, 33);
         btnClear.setBackground(new Color(255, 160, 122));
         btnClear.setFont(new Font("Myanmar3", Font.BOLD, 12));
         panel.add(btnClear);
-
-        btnClose = new JButton("Close");
-        btnClose.setMnemonic('E');
-        btnClose.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
-        btnClose.setBounds(190, 417, 85, 33);
-        btnClose.setBackground(new Color(255, 160, 122));
-        btnClose.setFont(new Font("Myanmar3", Font.BOLD, 12));
-        panel.add(btnClose);
         
         lblHostelId = new JLabel("");
         lblHostelId.setFont(new Font("Myanmar3", Font.BOLD, 12));
@@ -472,10 +459,23 @@ public class AddHostelView extends JFrame {
         lblStaffId.setBounds(20, 45, 137, 33);
         panel.add(lblStaffId);
         
-        lblNewLabel_1 = new JLabel("");
-        lblNewLabel_1.setToolTipText("Staff ID");
-        lblNewLabel_1.setBounds(160, 45, 175, 33);
-        panel.add(lblNewLabel_1);
+        lblAutoStaffID = new JLabel("");
+        lblAutoStaffID.setToolTipText("Staff ID");
+        lblAutoStaffID.setBounds(160, 45, 175, 33);
+        lblAutoStaffID.setText(staff.getStaffID());
+        panel.add(lblAutoStaffID);
+        
+        JButton btnBack = new JButton("Back");
+        btnBack.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		new StaffHomePage(staff);
+        	}
+        });
+        btnBack.setMnemonic('E');
+        btnBack.setFont(new Font("Dialog", Font.BOLD, 12));
+        btnBack.setBackground(new Color(255, 160, 122));
+        btnBack.setBounds(194, 417, 85, 33);
+        panel.add(btnBack);
 
      // Create the table first
         tblHostel = new JTable();
@@ -490,7 +490,7 @@ public class AddHostelView extends JFrame {
 
         // Wrap the table inside a JScrollPane
         scrollPane = new JScrollPane(tblHostel);
-        scrollPane.setBounds(430, 145, 474, 418);
+        scrollPane.setBounds(430, 145, 474, 169);
 
         // Allow horizontal and vertical scroll bars
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -663,7 +663,8 @@ public class AddHostelView extends JFrame {
 	
 	
 	public void createTable() {
-		 
+		
+		dtm.addColumn("Staff ID");
 		dtm.addColumn("Hostel ID");
 		dtm.addColumn("Hostel Name");
 		dtm.addColumn("Room Capacity");
@@ -677,7 +678,8 @@ public class AddHostelView extends JFrame {
 		setColumnWidth(1,100);
 		setColumnWidth(2,100);
 		setColumnWidth(3,100);
-		setColumnWidth(4,300);
+		setColumnWidth(4,100);
+		setColumnWidth(5,300);
 	}
     
 	public void clear() {
@@ -693,18 +695,19 @@ public class AddHostelView extends JFrame {
 
 
 	public void showList() throws SQLException{
-			String data[] = new String[5];
+			String data[] = new String[6];
 			AddHostelController tc = new AddHostelController();
 			
 			
 			List<AddHostelModel>list = tc.selectall();
 			dtm.setRowCount(0);
 			for(AddHostelModel tm:list) {
-				data[0]=tm.getHostel_id();
-				data[1]=tm.getHostel_name();
-				data[2] =tm.getRoom_capacity()+"";
-				data[3]=tm.getHostel_category();
-				data[4] = tm.getHostel_address();
+				data[0]=tm.getStaff_ID();
+				data[1]=tm.getHostel_id();
+				data[2]=tm.getHostel_name();
+				data[3] =tm.getRoom_capacity()+"";
+				data[4]=tm.getHostel_category();
+				data[5] = tm.getHostel_address();
 
 				dtm.addRow(data);
 				

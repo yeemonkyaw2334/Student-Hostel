@@ -19,67 +19,77 @@ public class LogInView extends JFrame {
 
     public LogInView() {
         setTitle("Staff Login");
-        setSize(750, 400);
+        setSize(1000, 520);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null); // Center the window
-        setLayout(new BorderLayout());
+        setLocationRelativeTo(null);
+        getContentPane().setLayout(null);
 
-        // ========= Left Image Panel =========
+        // ========== Left Image Panel ==========
         JPanel leftPanel = new JPanel();
-        leftPanel.setBackground(Color.WHITE);
+        leftPanel.setBounds(0, 0, 600, 520); // Expanded to the right
+        leftPanel.setBackground(new Color(25, 118, 210));
         leftPanel.setLayout(new BorderLayout());
 
         imageLabel = new JLabel();
         ImageIcon icon = new ImageIcon(this.getClass().getResource("/login 1.jpg"));
-        Image img = icon.getImage().getScaledInstance(300, 400, Image.SCALE_SMOOTH);
+        Image img = icon.getImage().getScaledInstance(600, 520, Image.SCALE_SMOOTH);
         imageLabel.setIcon(new ImageIcon(img));
         imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
         leftPanel.add(imageLabel, BorderLayout.CENTER);
 
-        // ========= Right Form Panel =========
+        getContentPane().add(leftPanel);
+
+        // ========== Right Form Panel ==========
         JPanel rightPanel = new JPanel();
-        rightPanel.setBackground(new Color(245, 245, 245));
+        rightPanel.setBounds(600, 0, 400, 520); // Adjusted for new left panel width
+        rightPanel.setBackground(new Color(255, 255, 204));
         rightPanel.setLayout(null);
 
-        JLabel titleLabel = new JLabel("Staff Login");
-        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 22));
-        titleLabel.setBounds(100, 30, 200, 30);
+        JLabel titleLabel = new JLabel("Staff Login Portal");
+        titleLabel.setFont(new Font("Verdana", Font.BOLD, 24));
+        titleLabel.setForeground(new Color(33, 33, 33));
+        titleLabel.setBounds(66, 60, 300, 40);
         rightPanel.add(titleLabel);
 
-        JLabel nameLabel = new JLabel("Staff Name:");
-        nameLabel.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-        nameLabel.setBounds(50, 90, 100, 25);
+        JLabel nameLabel = new JLabel("Username:");
+        nameLabel.setFont(new Font("Verdana", Font.PLAIN, 16));
+        nameLabel.setBounds(40, 173, 106, 25);
         rightPanel.add(nameLabel);
 
         nameField = new JTextField();
-        nameField.setBounds(160, 90, 200, 30);
+        nameField.setFont(new Font("Verdana", Font.PLAIN, 15));
+        nameField.setBounds(150, 169, 200, 35);
+        nameField.setBorder(BorderFactory.createLineBorder(new Color(200, 200, 200)));
         rightPanel.add(nameField);
 
         JLabel passwordLabel = new JLabel("Password:");
-        passwordLabel.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-        passwordLabel.setBounds(50, 140, 100, 25);
+        passwordLabel.setFont(new Font("Verdana", Font.PLAIN, 16));
+        passwordLabel.setBounds(40, 262, 100, 25);
         rightPanel.add(passwordLabel);
 
         passwordField = new JPasswordField();
-        passwordField.setBounds(160, 140, 200, 30);
+        passwordField.setFont(new Font("Verdana", Font.PLAIN, 15));
+        passwordField.setBounds(150, 258, 200, 35);
+        passwordField.setBorder(BorderFactory.createLineBorder(new Color(200, 200, 200)));
         rightPanel.add(passwordField);
 
         loginButton = new JButton("Login");
-        loginButton.setFont(new Font("Segoe UI", Font.BOLD, 15));
-        loginButton.setBackground(new Color(0, 123, 255));
+        loginButton.setFont(new Font("Verdana", Font.BOLD, 16));
+        loginButton.setBackground(new Color(204, 51, 0));
         loginButton.setForeground(Color.WHITE);
         loginButton.setFocusPainted(false);
-        loginButton.setBounds(160, 200, 200, 35);
+        loginButton.setBounds(151, 331, 100, 40);
+        loginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         rightPanel.add(loginButton);
 
-        JLabel footer = new JLabel("Student Hostel Management System");
-        footer.setFont(new Font("Segoe UI", Font.ITALIC, 13));
+        JLabel footer = new JLabel("\u00A9 2025 Student Hostel Management System");
+        footer.setFont(new Font("Verdana", Font.ITALIC, 12));
+        footer.setForeground(Color.GRAY);
         footer.setHorizontalAlignment(SwingConstants.CENTER);
-        footer.setBounds(50, 280, 300, 30);
+        footer.setBounds(25, 430, 350, 30);
         rightPanel.add(footer);
 
-        add(leftPanel, BorderLayout.WEST);
-        add(rightPanel, BorderLayout.CENTER);
+        getContentPane().add(rightPanel);
 
         setVisible(true);
 
@@ -97,14 +107,12 @@ public class LogInView extends JFrame {
         String name = nameField.getText().trim();
         String password = new String(passwordField.getPassword());
 
-        DBConfig dbConfig = new DBConfig();
-
         if (validateLogIn(name, password)) {
-            JOptionPane.showMessageDialog(this, "✅ Login successful!");
-            dispose(); // Close the login window
+            JOptionPane.showMessageDialog(this, "\u2705 Login successful!");
+            dispose();
             new StaffHomePage(staff);
         } else {
-            JOptionPane.showMessageDialog(this, "❌ Invalid name or password.");
+            JOptionPane.showMessageDialog(this, "\u274C Invalid name or password.");
         }
     }
 

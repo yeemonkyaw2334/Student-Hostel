@@ -23,10 +23,10 @@ import java.util.List;
 
 public class RegisterView extends JFrame {
     private JComboBox<String> hostelComboBox;
-    private JTextField txtStatus;
     private JButton btnSave;
     private JLabel lblRegistrationID, RegistrationID, lblStaffIDAuto;
     private JLabel lblStudentID;
+    private JLabel lblStatus;
     private JButton btnUpdate;
     private JButton btnDelete;
     
@@ -66,10 +66,10 @@ public class RegisterView extends JFrame {
         setSize(911, 642);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        getContentPane().setLayout(null);
         
         // Gradient background for the frame
-        getContentPane().setBackground(new Color(245, 255, 250));
+        getContentPane().setBackground(new Color(255, 255, 153));
+        getContentPane().setLayout(null);
         
         // Title Label with a modern font
         JLabel lblNewLabel = new JLabel("Student Hostel Register Form");
@@ -108,6 +108,7 @@ public class RegisterView extends JFrame {
         getContentPane().add(HostelType);
         
         hostelComboBox = new JComboBox<>();
+        hostelComboBox.setBackground(new Color(255, 255, 153));
         hostelComboBox.setBounds(176, 331, 112, 28);
         hostelComboBox.addItem("Select");
         hostelComboBox.addItem("MaleHostel");
@@ -124,15 +125,10 @@ public class RegisterView extends JFrame {
         lblRegistrationStatus.setBounds(22, 439, 119, 28);
         getContentPane().add(lblRegistrationStatus);
         
-        // Status TextField
-        txtStatus = new JTextField(20);
-        txtStatus.setBounds(176, 439, 119, 28);
-        getContentPane().add(txtStatus);
-        
         // Save Button with style
         btnSave = new JButton("Save");
         btnSave.setBounds(23, 495, 77, 28);
-        btnSave.setBackground(new Color(0, 123, 255));
+        btnSave.setBackground(new Color(255, 153, 102));
         btnSave.setForeground(Color.WHITE);
         btnSave.setFocusPainted(false);
         btnSave.setFont(new Font("Arial", Font.BOLD, 14));
@@ -149,7 +145,7 @@ public class RegisterView extends JFrame {
                         lblStudentName.getText().trim().equals("") ||
                         hostelComboBox.getSelectedItem().equals("Select") ||
                         lblRegistrationDate.getText().trim().equals("") ||
-                        txtStatus.getText().trim().equals("")) {
+                        lblStatus.getText().trim().equals("")) {
                     JOptionPane.showMessageDialog(null, "There is a blank field!", "Fail", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
@@ -160,7 +156,7 @@ public class RegisterView extends JFrame {
                 bm.setStudentName(lblStudentName.getText());
                 bm.setHostelType(hostelComboBox.getSelectedItem().toString());
                 bm.setRegistrationDate(Date.valueOf(LocalDate.parse(lblRegistrationDate.getText())));
-                bm.setRegistrationStatus(txtStatus.getText());
+                bm.setRegistrationStatus(lblStatus.getText());
                 
                 try {
                     if (bc.isDuplicate(bm)) {
@@ -183,6 +179,7 @@ public class RegisterView extends JFrame {
         
         // Update Button with custom style
         btnUpdate = new JButton("Update");
+        btnUpdate.setBounds(120, 495, 89, 28);
         btnUpdate.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		RegisterModel RM = new RegisterModel();
@@ -195,7 +192,7 @@ public class RegisterView extends JFrame {
 							|| lblStudentName.getText().trim().equals("")
 							|| hostelComboBox.getSelectedItem().equals("Select") 
 							|| lblRegistrationDate.getText().trim().equals("") 
-							|| txtStatus.getText().trim().equals("")) {
+							|| lblStatus.getText().trim().equals("")) {
 
 						JOptionPane.showMessageDialog(null, "There is a blank field!", "Fail",
 								JOptionPane.ERROR_MESSAGE);
@@ -212,7 +209,7 @@ public class RegisterView extends JFrame {
 						Date sqlDate = Date.valueOf(localDate);
 						RM.setRegistrationDate(sqlDate);
 
-						RM.setRegistrationStatus(txtStatus.getText().trim());
+						RM.setRegistrationStatus(lblStatus.getText().trim());
 						if (Checking.IsValidName(RM.getStudentName()) || (!Checking.IsAllDigit(RM.getStudentName()))) {
 							JOptionPane.showMessageDialog(null, "Invalid Name", "Invalid", JOptionPane.ERROR_MESSAGE);
 						} else {
@@ -238,8 +235,7 @@ public class RegisterView extends JFrame {
 				}
 			}
         });
-        btnUpdate.setBounds(120, 495, 89, 28);
-        btnUpdate.setBackground(new Color(255, 193, 7));
+        btnUpdate.setBackground(new Color(255, 153, 102));
         btnUpdate.setForeground(Color.WHITE);
         btnUpdate.setFont(new Font("Arial", Font.BOLD, 14));
         btnUpdate.setFocusPainted(false);
@@ -247,6 +243,7 @@ public class RegisterView extends JFrame {
         
         // Delete Button with custom style
         btnDelete = new JButton("Delete");
+        btnDelete.setBounds(219, 495, 89, 28);
         		btnDelete.addActionListener(new ActionListener() {
         		    public void actionPerformed(ActionEvent e) {
         		        String regID = lblRegistrationID.getText().trim();
@@ -279,9 +276,7 @@ public class RegisterView extends JFrame {
         		        }
         		    }
         		});
-        
-        btnDelete.setBounds(219, 495, 89, 28);
-        btnDelete.setBackground(new Color(220, 53, 69));
+        btnDelete.setBackground(new Color(255, 153, 102));
         btnDelete.setForeground(Color.WHITE);
         btnDelete.setFont(new Font("Arial", Font.BOLD, 14));
         btnDelete.setFocusPainted(false);
@@ -289,22 +284,25 @@ public class RegisterView extends JFrame {
         
         // Clear Button
         JButton btnClear = new JButton("Clear");
+        btnClear.setBackground(new Color(255, 153, 102));
+        btnClear.setBounds(66, 539, 77, 28);
         btnClear.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		clear();
         	}
         });
-        btnClear.setBounds(66, 539, 77, 28);
         getContentPane().add(btnClear);
         
         // Close Button
-        JButton btnClose = new JButton("Close");
+        JButton btnClose = new JButton("Back");
+        btnClose.setBackground(new Color(255, 153, 102));
         btnClose.setBounds(179, 539, 77, 28);
         getContentPane().add(btnClose);
         
         // Add action listener to close the form
         btnClose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	new StaffHomePage(staff);
                 dispose(); // This closes the current frame/window
             }
         });
@@ -320,14 +318,15 @@ public class RegisterView extends JFrame {
                 g2d.fillRect(0, 0, getWidth(), getHeight());
             }
         };
-        panel_1.setBounds(339, 177, 505, 416);
+        panel_1.setBackground(new Color(255, 153, 102));
+        panel_1.setBounds(339, 177, 507, 182);
         panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
         getContentPane().add(panel_1);
         panel_1.setLayout(null);
         
         // Scroll Pane for Table
         scrollPane = new JScrollPane();
-        scrollPane.setBounds(20, 21, 464, 372);
+        scrollPane.setBounds(20, 21, 464, 136);
         panel_1.add(scrollPane);
         
         tblRegistration = new JTable();
@@ -345,7 +344,7 @@ public class RegisterView extends JFrame {
 				lblStudentName.setText((String) tblRegistration.getValueAt(r, 3));
 				hostelComboBox.setSelectedItem((String) tblRegistration.getValueAt(r, 4));
 				lblRegistrationDate.setText((String) tblRegistration.getValueAt(r, 5));
-				txtStatus.setText((String) tblRegistration.getValueAt(r, 6));
+				lblStatus.setText((String) tblRegistration.getValueAt(r, 6));
         	}
         });
         tblRegistration.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -383,6 +382,10 @@ public class RegisterView extends JFrame {
         JButton btnShowall = new JButton("ShowAll");
         btnShowall.setBounds(342, 143, 106, 28);
         getContentPane().add(btnShowall);
+        
+        lblStatus = new JLabel("Get");  // Set default text to "Get"
+        lblStatus.setBounds(179, 446, 109, 14);  // Adjust the position as needed
+        getContentPane().add(lblStatus);
                 
         btnShowall.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -458,7 +461,7 @@ public class RegisterView extends JFrame {
     }
     	private void clear() {
     	    hostelComboBox.setSelectedIndex(0);
-    	    txtStatus.setText("");
+    	    hostelComboBox.requestFocus();
 
     	    // Clear or reset labels
     	    try {
@@ -471,7 +474,7 @@ public class RegisterView extends JFrame {
     	    LocalDate currentDate = LocalDate.now();
     	    lblRegistrationDate.setText(currentDate.format(DateTimeFormatter.ISO_DATE));
 
-    	    hostelComboBox.requestFocus();
+    	    
     	
 
     }

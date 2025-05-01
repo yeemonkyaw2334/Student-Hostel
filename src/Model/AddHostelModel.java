@@ -8,7 +8,7 @@ public class AddHostelModel {
 	private int room_capacity;
 	private String hostel_category;
 	private String hostel_address;
-
+    private String staff_ID;
 	
 	
 	public String getHostel_id() {
@@ -52,6 +52,12 @@ public class AddHostelModel {
 	// Setter
 	public void setHostel_address(String hostel_address) {
 	    this.hostel_address = hostel_address;
+	}
+	public String getStaff_ID() {
+		return staff_ID;
+	}
+	public void setStaff_ID(String staff_ID) {
+		this.staff_ID = staff_ID;
 	}
 
 	

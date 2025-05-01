@@ -9,7 +9,7 @@ public class RegisterModel {
     private String hostelType;
     private String studentName;
     private Date registrationDate;
-    private String registrationStatus;
+    private String registrationStatus;  // Corrected field name from lblStatus to registrationStatus
 
     // Getter and setter for registrationID
     public String getRegistrationID() {
@@ -55,8 +55,9 @@ public class RegisterModel {
     public String getRegistrationStatus() {
         return registrationStatus;
     }
+
     public void setRegistrationStatus(String registrationStatus) {
-        this.registrationStatus = registrationStatus;
+        this.registrationStatus = registrationStatus;  // Added setter for registrationStatus
     }
 
     // Getter and setter for registrationDate
@@ -66,6 +67,4 @@ public class RegisterModel {
     public void setRegistrationDate(Date registrationDate) {
         this.registrationDate = registrationDate;
     }
-    
-    
 }

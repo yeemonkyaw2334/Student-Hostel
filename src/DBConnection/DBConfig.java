@@ -3,6 +3,7 @@ package DBConnection;
 import java.sql.Connection;
 
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.List;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -117,5 +118,22 @@ public class DBConfig {
     	e.printStackTrace();
     }
     }
+  //total count 
+    public static String totalCount(String table) throws SQLException {
+        String total_count = null;
+        String sql = "SELECT COUNT(*) FROM " + table;
+        
+        DBConfig db = new DBConfig(); // instantiate to call non-static method
+        Connection conn = db.getConnection(); // get the initialized connection
+        
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            total_count = rs.getString(1);
+        }
+        return total_count;
+    }
+
+
 //  error fix end *******************
 }
